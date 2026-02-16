@@ -80,12 +80,12 @@ TEST_OSM_TARGET			= $(TESTBIN_DIR)/testosm
 all: directories \
 run_svgtest \
 make_svglib \
-run_sinktest \
 run_sourcetest \
+run_sinktest \
 run_svgwritertest \
-run_osmtest \
 run_xmltest \
 run_xmlbstest \
+run_osmtest \
 gen_html
 
 run_svgtest: $(TEST_SVG_TARGET)

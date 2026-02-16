@@ -12,237 +12,225 @@ The project fails to function properly in ...
 
 ## Code References
 * [GoogleTest Primer](https://google.github.io/googletest/primer.html)
+* [std::vector::push_back](https://cplusplus.com/reference/vector/vector/push_back/)
+* [C++ Vectors](https://www.w3schools.com/cpp/cpp_vectors.asp)
+* [std::unordered_map](https://en.cppreference.com/w/cpp/container/unordered_map.html)
+* [std::unordered_map<Key,T,Hash,KeyEqual,Allocator>::find](https://en.cppreference.com/w/cpp/container/unordered_map/find.html)
+* [std::pair::pair](https://cplusplus.com/reference/utility/pair/pair/)
+* [std::make_pair](https://cplusplus.com/reference/utility/make_pair/)
+* [call to implicitly-deleted default constructor of ‘unordered_map<pair<int, int>, int>](https://medium.com/@gulshansharma014/call-to-implicitly-deleted-default-constructor-of-unordered-map-pair-int-int-int-d3b2a6da0b41)
 
 ## Generative AI Use
 I used ChatGPT for Prompt 1 and Prompt 2.
 
 ### Prompt 1
-How can I initialize a shared_ptr?
+What type does the .find() function return when used on an unordered map? How do I access the actual value from what .find() returns?
 
 ### Response 1
-In C++, there are several common (and safe) ways to initialize a `std::shared_ptr`, depending on what you’re trying to do. Here’s a clear breakdown with examples and guidance on when to use each.
+In C++ (STL), when you call .find() on an std::unordered_map, it returns an iterator to the element — not the value itself.
 
-1. Using `std::make_shared` (⭐ **recommended**)
+✅ Return Type of .find()
 
-```cpp
-#include <memory>
+For a map declared as:
 
-auto ptr = std::make_shared<int>(42);
-```
+std::unordered_map<Key, Value> myMap;
 
-**Why this is preferred:**
 
-* Exception-safe (single allocation for object + control block)
-* More efficient than separate allocations
-* Cleaner and harder to misuse
+The call:
 
-Use this whenever you are creating a new object.
+myMap.find(key);
 
-2. From `new` (allowed, but usually discouraged)
 
-```cpp
-std::shared_ptr<int> ptr(new int(42));
-```
+returns:
 
-⚠️ **Downsides:**
+std::unordered_map<Key, Value>::iterator
 
-* Two allocations (object + control block)
-* Risk of leaks if exceptions occur between allocations
-* Easier to accidentally mix with raw pointers
 
-Only use this if you **cannot** use `make_shared` (e.g., custom deleter requirements).
+(or const_iterator if the map is const)
 
-3. With a custom deleter
+✅ What the Iterator Points To
 
-```cpp
-auto deleter = [](FILE* f) {
-    if (f) fclose(f);
-};
+The iterator points to a std::pair<const Key, Value>:
 
-std::shared_ptr<FILE> ptr(fopen("file.txt", "r"), deleter);
-```
+(key, value)
 
-Use this when managing non-`new` resources (FILE*, sockets, handles, etc.).
 
-4. From an existing `std::unique_ptr`
+So you must access either .first (key) or .second (value).
 
-```cpp
-std::unique_ptr<int> uptr = std::make_unique<int>(42);
-std::shared_ptr<int> sptr = std::move(uptr);
-```
+✅ How to Access the Value
+Method 1 — Using ->second (most common)
+auto it = myMap.find(key);
 
-Ownership is transferred from `unique_ptr` to `shared_ptr`.
+if (it != myMap.end()) {
+    Value val = it->second;
+}
 
-5. Aliasing constructor (advanced)
 
-```cpp
-auto sptr = std::make_shared<std::pair<int, int>>(1, 2);
-std::shared_ptr<int> alias(sptr, &sptr->first);
-```
+it->first → key
 
-* `alias` shares ownership with `sptr`
-* Points to a subobject
+it->second → value
 
-Useful for advanced lifetime management.
+Method 2 — Using Dereference (*it)
+auto it = myMap.find(key);
 
-6. Copying or assigning another `shared_ptr`
+if (it != myMap.end()) {
+    Value val = (*it).second;
+}
 
-```cpp
-std::shared_ptr<int> p1 = std::make_shared<int>(10);
-std::shared_ptr<int> p2 = p1;   // reference count increases
-```
 
-What **not** to do 🚫
+Equivalent to it->second, just less convenient.
 
-```cpp
-int* raw = new int(5);
-std::shared_ptr<int> p1(raw);
-std::shared_ptr<int> p2(raw);  // ❌ double delete!
-```
+⚠️ Important: Check for .end()
 
-Each `shared_ptr` must be created from the **same control block**, not the same raw pointer.
+If the key is not found, .find() returns:
 
----
+myMap.end()
 
-## Summary
 
-| Situation                  | Best approach                 |
-| -------------------------- | ----------------------------- |
-| Creating a new object      | `std::make_shared<T>(...)`    |
-| Custom cleanup needed      | `shared_ptr` + custom deleter |
-| Converting ownership       | Move from `unique_ptr`        |
-| Sharing existing ownership | Copy another `shared_ptr`     |
+Dereferencing that causes undefined behavior.
 
-If you want, tell me your **specific use case** (object type, ownership model, custom cleanup, etc.), and I can recommend the safest initialization pattern.
+Always check first:
+
+if (it != myMap.end()) {
+    // safe to use it
+}
+
+✅ Example
+#include <unordered_map>
+#include <iostream>
+
+int main() {
+    std::unordered_map<int, std::string> m;
+    m[1] = "apple";
+    m[2] = "banana";
+
+    auto it = m.find(2);
+
+    if (it != m.end()) {
+        std::cout << it->second << std::endl;  // prints "banana"
+    }
+}
+
+
+If you want, I can explain:
+
+Difference between .find() and operator[]
+
+How to insert if not found
+
+How this compares to std::map
+
+Common mistakes students make with iterators
+
+Just ask 👍
 
 ### Changes 1
-At first, I initialized std::shared_ptr with std::make_shared and the auto keyword:
-    auto sink = std::make_shared<CDataSink>();  
-But after Discussion section, I changed that to use a more straightforward method by using:
-    std::shared_ptr<CDataSink> DSink;
+I was unsure of how looking for a particular stop ID in the DStopsByID map would work, and what it would return. I realized that .find() returns an iterator, not the direct value. So, using the auto keyword will allow me to access the iterator without having to specify the exact type, which would be much more complex. After that, I can use target->second to access the value of the key-value pair. The response also made me realize that I have to check whether the key was actually found. I added a check to see if the target key is not equal to DStopByID.end(), since .find() returns .end() if the key was not found in the map. This check makes sure that we can proceed to use the specified key-value pair.
 
 ### Prompt 2
-Given this constructor, how can I give the parser callback functions? SImplementation(std::shared_ptr< CDataSource > src){ DSource = src; DParser = XML_ParserCreate(nullptr); }
+In C++, how can I use .find() on an unordered_map with two keys?
 
 ### Response 2
-That constructor looks like you’re using Expat (XML_ParserCreate), so the way you give the parser callback functions is by registering handlers on the XML_Parser object after you create it.
+In C++, std::unordered_map only supports one key per entry. If you conceptually have “two keys,” you need to combine them into a single key type.
+Here are the common ways to do it:
 
-The key ideas are:
+✅ Option 1: Use std::pair as the key (most common)
+You combine the two keys into a single std::pair<K1, K2> — but you must provide a hash function because unordered_map doesn’t hash pairs by default (pre-C++20).
+Example
+#include <unordered_map>
+#include <utility>
 
-Call the appropriate XML_Set*Handler functions
-
-Use XML_SetUserData so your callbacks can access the SImplementation instance
-
-Make the callbacks static (or free functions), then forward to the object
-
-Basic pattern (Expat-style)
-1. Constructor: register handlers
-SImplementation::SImplementation(std::shared_ptr<CDataSource> src) {
-    DSource = src;
-    DParser = XML_ParserCreate(nullptr);
-
-    // Let callbacks know which object they belong to
-    XML_SetUserData(DParser, this);
-
-    // Register callbacks
-    XML_SetElementHandler(
-        DParser,
-        &SImplementation::StartElement,
-        &SImplementation::EndElement
-    );
-
-    XML_SetCharacterDataHandler(
-        DParser,
-        &SImplementation::CharacterData
-    );
-}
-
-2. Callback function declarations
-
-Expat requires C-style function signatures, so these must be static:
-
-class SImplementation {
-public:
-    SImplementation(std::shared_ptr<CDataSource> src);
-
-private:
-    std::shared_ptr<CDataSource> DSource;
-    XML_Parser DParser;
-
-    // Static callbacks
-    static void StartElement(
-        void* userData,
-        const char* name,
-        const char** attrs
-    );
-
-    static void EndElement(
-        void* userData,
-        const char* name
-    );
-
-    static void CharacterData(
-        void* userData,
-        const char* data,
-        int length
-    );
-
-    // Non-static helpers (optional)
-    void OnStartElement(const char* name, const char** attrs);
+struct PairHash {
+    size_t operator()(const std::pair<int, int>& p) const {
+        return std::hash<int>()(p.first) ^ (std::hash<int>()(p.second) << 1);
+    }
 };
 
-3. Forward callbacks to the instance
-void SImplementation::StartElement(
-    void* userData,
-    const char* name,
-    const char** attrs
-) {
-    auto* self = static_cast<SImplementation*>(userData);
-    self->OnStartElement(name, attrs);
+int main() {
+    std::unordered_map<std::pair<int,int>, std::string, PairHash> m;
+
+    m[{1, 2}] = "hello";
+
+    auto it = m.find({1, 2});
+    if (it != m.end()) {
+        // Found
+    }
 }
 
-void SImplementation::EndElement(void* userData, const char* name) {
-    auto* self = static_cast<SImplementation*>(userData);
-    // handle end element
+✔️ You call .find({key1, key2})
+
+✅ Option 2: Use a custom struct as the key (cleaner for complex cases)
+struct Key {
+    int a;
+    int b;
+
+    bool operator==(const Key& other) const {
+        return a == other.a && b == other.b;
+    }
+};
+
+struct KeyHash {
+    size_t operator()(const Key& k) const {
+        return std::hash<int>()(k.a) ^ (std::hash<int>()(k.b) << 1);
+    }
+};
+
+std::unordered_map<Key, int, KeyHash> m;
+
+m[{1, 2}] = 42;
+
+auto it = m.find({1, 2});
+
+✔️ Best when keys have meaning (e.g., coordinates, IDs)
+
+✅ Option 3: Use nested maps (sometimes useful)
+std::unordered_map<int, std::unordered_map<int, std::string>> m;
+
+m[1][2] = "hello";
+
+auto it1 = m.find(1);
+if (it1 != m.end()) {
+    auto it2 = it1->second.find(2);
+    if (it2 != it1->second.end()) {
+        // Found
+    }
 }
 
-void SImplementation::CharacterData(
-    void* userData,
-    const char* data,
-    int length
-) {
-    auto* self = static_cast<SImplementation*>(userData);
-    // handle character data
-}
+✔️ Good if the first key partitions data logically
+❌ Slightly slower / more verbose
 
-Why this works (important concept)
+🚀 Recommendation
+Use Option 1 (pair) unless you have a strong reason not to.
+It’s:
 
-Expat is a C library, so it can’t call C++ member functions directly
 
-XML_SetUserData gives you a void* back in every callback
+Simple
 
-You store this there and cast it back inside the callback
 
-This lets callbacks behave like real member functions
+Efficient
 
-Common mistakes to avoid 🚫
 
-❌ Trying to use non-static member functions as callbacks
+Idiomatic C++
 
-❌ Forgetting XML_SetUserData
 
-❌ Capturing lambdas (Expat can’t use them)
 
-If you want, I can:
+If you want, I can also show:
 
-Show a minimal working XML parse loop
 
-Explain how to handle attributes safely
+A reusable generic hash for pairs
 
-Help design a clean RAII wrapper for XML_Parser
 
-Just tell me 👍
+How to support more than two keys
+
+
+How this differs from std::map
+
+
+C++20/23 improvements
+
+
+Just ask 👍
 
 ### Changes 2
-I added code to the SImplementation constructor to make sure that the constructed object has callback functions that the parser can use to process elements that it is picking up from the data source. The line XML_SetUserData(DParser, this); makes sure that when the parser finds an element and callback functions are called, a pointer to the current SImplementation object is passed in as the data parameter. With this, the callback functions have access to the parser, source, and queue. The line XML_SetElementHandler(DParser, ExpatStartElement, ExpatEndElement); saves the two callback functions to the parser so that the parser can call the functions when it reads in a start tag or closing tag. The line XML_SetCharacterDataHandler(DParser, ExpatCharacterData); 
-saves the ExpatCharacterData function to the parser so that the parser can call the function if it reads text between tags.
+PathByStopIDs() takes in two parameters, the start and end stop IDs. The .find() function only allows us to find an entry using one key, but we have to find a path that takes into account both the start and end stop IDs. I realized that I can utilize a std::pair to combine the start and stop IDs and be able to find a map entry using a singular pair key. Instead of trying to do DPathsByStopIDs.find(start, end), I changed it to:
+
