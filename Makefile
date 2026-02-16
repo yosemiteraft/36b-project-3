@@ -200,4 +200,4 @@ clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(TESTBIN_DIR)
 	rm -rf $(TESTOBJ_DIR)
-	rm -rf run_*test
+	rm -rf $(TESTTMP_DIR)

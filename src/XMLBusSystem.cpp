@@ -75,7 +75,10 @@ struct CXMLBusSystem::SImplementation{
 
         TStopID GetStopID(std::size_t index) const noexcept override {
             // https://www.w3schools.com/cpp/cpp_vectors.asp
-            return DStopIDs[index];
+            if(index < DStopIDs.size()) {
+                return DStopIDs[index];
+            }
+            return InvalidStopID;
         }
 
         void AddStop(TStopID stopid) {
@@ -107,7 +110,10 @@ struct CXMLBusSystem::SImplementation{
         }
 
         CStreetMap::TNodeID GetNodeID(std::size_t index) const noexcept override {
-            return DNodeIDs[index];
+            if(index < DNodeIDs.size()) {
+                return DNodeIDs[index];
+            }
+            return 0;
         }
 
         void AddNode(CStreetMap::TNodeID nodeid) {
