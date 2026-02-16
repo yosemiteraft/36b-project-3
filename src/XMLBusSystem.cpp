@@ -234,24 +234,18 @@ struct CXMLBusSystem::SImplementation{
     }
 
     void ParseBusSystem(std::shared_ptr< CXMLReader > systemsource){
-        SXMLEntity TempEntity;
-        if(!FindStartTag(systemsource, DBusSystemTag)){
+        if(!FindStartTag(systemsource,DBusSystemTag)){
             return;
         }
-        if(!FindStartTag(systemsource, DStopsTag)){
+        if(!FindStartTag(systemsource,DStopsTag)){
             return;
         }
+        ParseStops(systemsource); // parse stops after finding tag
+
         if(!FindStartTag(systemsource, DRoutesTag)) {
             return;
         }
-        // call appropriate parsing fns depending on whether it is stops or routes
-        if(TempEntity.DType == SXMLEntity::EType::StartElement) {
-            if(TempEntity.DNameData == DStopsTag) {
-                ParseStops(systemsource);
-            } else if(TempEntity.DNameData == DRoutesTag) {
-                ParseRoutes(systemsource);
-            }
-        }
+        ParseRoutes(systemsource); // parse routes after finding tag
     }
 
     void ParsePathSystem(std::shared_ptr< CXMLReader > systemsource) {
