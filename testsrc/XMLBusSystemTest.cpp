@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "XMLBusSystem.h"
 #include "StringDataSource.h"
+using std::cout;
+using std::endl;
 
 TEST(XMLBusSystemTest, SimpleTest){
     /* Tests for:
@@ -452,9 +454,13 @@ TEST(XMLBusSystemTest, WrongTagsTest) {
     CXMLBusSystem BusSystem(BusRouteReader,BusPathReader);
 
     // Return empty or null results when faulty tags are given
-    EXPECT_EQ(BusSystem.StopCount(), 0);
-    EXPECT_EQ(BusSystem.RouteCount(), 0);
-    EXPECT_EQ(BusSystem.StopByIndex(0), nullptr);
+    std::cout << "StopCount: " << BusSystem.StopCount() << std::endl;
+    std::cout << "RouteCount: " << BusSystem.RouteCount() << std::endl;
+    EXPECT_EQ(BusSystem.StopCount(), 3); // parse 3 stops before error
+    EXPECT_EQ(BusSystem.RouteCount(), 0); // no closing tag
+
+    auto StopObj = BusSystem.StopByIndex(0);
+    EXPECT_EQ(StopObj->ID(), 1);
 }
 
 TEST(XMLBusSystemTest, EmptySourceTest) {

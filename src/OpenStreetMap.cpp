@@ -13,6 +13,7 @@ struct COpenStreetMap::SImplementation{
         const std::string DNodeLonAttr = "lon";
         TNodeID DID;
         SLocation DLocation;
+        std::vector<std::pair<std::string, std::string>> DAttributes;
 
         SNode(const SXMLEntity &entity){
             auto NodeID = std::stoull(entity.AttributeValue(DNodeIDAttr));
@@ -20,11 +21,9 @@ struct COpenStreetMap::SImplementation{
             auto NodeLon = std::stod(entity.AttributeValue(DNodeLonAttr));
             DID = NodeID;
             DLocation = SLocation{NodeLat,NodeLon};
-            
+            DAttributes = entity.DAttributes;
         }
-        ~SNode(){
-
-        }
+        ~SNode(){}
 
         TNodeID ID() const noexcept override{
             return DID;
@@ -35,56 +34,87 @@ struct COpenStreetMap::SImplementation{
         }
         
         std::size_t AttributeCount() const noexcept override{
-
+            return DAttributes.size();
         }
         
         std::string GetAttributeKey(std::size_t index) const noexcept override{
-
+            // https://medium.com/@ayushmishra8299/how-to-access-elements-of-a-pair-in-c-9e4cace740a4#:~:text=Accessing%20Elements%20of%20a%20Pair,element%20we%20want%20to%20access.
+            if(index < DAttributes.size()) {
+                return DAttributes[index].first;
+            }
+            // https://stackoverflow.com/questions/26587110/returning-an-empty-string-efficient-way-in-c
+            return {};
         }
         
         bool HasAttribute(const std::string &key) const noexcept override{
-
+            for(auto &attr : DAttributes) {
+                if(attr.first == key) {
+                    return true;
+                }
+            }
+            return false;
         }
         
         std::string GetAttribute(const std::string &key) const noexcept override{
-
+            for(auto &attr : DAttributes) {
+                if(attr.first == key) {
+                    return attr.second;
+                }
+            }
+            return {};
         }
         
     };
 
     struct SWay: public CStreetMap::SWay{
-        ~SWay(){
+        TWayID DID;
+        std::vector<std::pair<std::string, std::string>> DAttributes;
+        std::vector<TNodeID> DNodeIDs;
 
-        }
+        ~SWay(){}
 
         TWayID ID() const noexcept override{
-
+            return DID;
         }
         
         std::size_t NodeCount() const noexcept override{
-
+            return DNodeIDs.size();
         }
         
         TNodeID GetNodeID(std::size_t index) const noexcept override{
-
+            if(index < DNodeIDs.size()) {
+                return DNodeIDs[index];
+            }
         }
         
         std::size_t AttributeCount() const noexcept override{
-
+            return DAttributes.size();
         }
         
         std::string GetAttributeKey(std::size_t index) const noexcept override{
-
+            if(index < DAttributes.size()) {
+                return DAttributes[index].first;
+            }
+            return {};
         }
         
         bool HasAttribute(const std::string &key) const noexcept override{
-
+            for(auto &attr : DAttributes) {
+                if(attr.first == key) {
+                    return true;
+                }
+            }
+            return false;
         }
         
         std::string GetAttribute(const std::string &key) const noexcept override{
-
+            for(auto &attr : DAttributes) {
+                if(attr.first == key) {
+                    return attr.second;
+                }
+            }
+            return {};
         }
-        
     };
 
     std::vector<std::shared_ptr<SNode>> DNodesByIndex;
