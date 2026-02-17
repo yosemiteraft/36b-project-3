@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="17" failures="0" disabled="0" errors="0" time="0.001" timestamp="2026-02-17T00:34:28.068" name="AllTests">
-  <testsuite name="XMLBusSystemTest" tests="17" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2026-02-17T00:34:28.068">
-    <testcase name="SimpleTest" file="testsrc/XMLBusSystemTest.cpp" line="7" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="StopByIndexTest" file="testsrc/XMLBusSystemTest.cpp" line="59" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="StopByIDTest" file="testsrc/XMLBusSystemTest.cpp" line="90" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="SetDescriptionTest" file="testsrc/XMLBusSystemTest.cpp" line="110" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="ZeroStopsTest" file="testsrc/XMLBusSystemTest.cpp" line="126" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="ZeroNodesTest" file="testsrc/XMLBusSystemTest.cpp" line="138" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="ZeroStopsZeroNodesTest" file="testsrc/XMLBusSystemTest.cpp" line="160" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="PathByStopIDsTest" file="testsrc/XMLBusSystemTest.cpp" line="181" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="NoPathFoundTest" file="testsrc/XMLBusSystemTest.cpp" line="228" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="InvalidPathStopIDTest" file="testsrc/XMLBusSystemTest.cpp" line="246" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="PathInvalidNodeTest" file="testsrc/XMLBusSystemTest.cpp" line="272" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="RouteTest" file="testsrc/XMLBusSystemTest.cpp" line="297" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="RouteByInvalidIndexTest" file="testsrc/XMLBusSystemTest.cpp" line="343" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="RouteByInvalidNameTest" file="testsrc/XMLBusSystemTest.cpp" line="374" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.068" classname="XMLBusSystemTest" />
-    <testcase name="RouteGetInvalidStopIDTest" file="testsrc/XMLBusSystemTest.cpp" line="402" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.069" classname="XMLBusSystemTest" />
-    <testcase name="WrongTagsTest" file="testsrc/XMLBusSystemTest.cpp" line="432" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.069" classname="XMLBusSystemTest" />
-    <testcase name="EmptySourceTest" file="testsrc/XMLBusSystemTest.cpp" line="466" status="run" result="completed" time="0." timestamp="2026-02-17T00:34:28.069" classname="XMLBusSystemTest" />
+<testsuites tests="17" failures="0" disabled="0" errors="0" time="0.003" timestamp="2026-02-17T06:00:24.234" name="AllTests">
+  <testsuite name="XMLBusSystemTest" tests="17" failures="0" disabled="0" skipped="0" errors="0" time="0.002" timestamp="2026-02-17T06:00:24.235">
+    <testcase name="SimpleTest" file="testsrc/XMLBusSystemTest.cpp" line="7" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="StopByIndexTest" file="testsrc/XMLBusSystemTest.cpp" line="59" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="StopByIDTest" file="testsrc/XMLBusSystemTest.cpp" line="95" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="SetDescriptionTest" file="testsrc/XMLBusSystemTest.cpp" line="121" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="ZeroStopsTest" file="testsrc/XMLBusSystemTest.cpp" line="142" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="ZeroNodesTest" file="testsrc/XMLBusSystemTest.cpp" line="158" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="ZeroStopsZeroNodesTest" file="testsrc/XMLBusSystemTest.cpp" line="185" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="PathByStopIDsTest" file="testsrc/XMLBusSystemTest.cpp" line="211" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="NoPathFoundTest" file="testsrc/XMLBusSystemTest.cpp" line="263" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.235" classname="XMLBusSystemTest" />
+    <testcase name="InvalidPathStopIDTest" file="testsrc/XMLBusSystemTest.cpp" line="284" status="run" result="completed" time="0.001" timestamp="2026-02-17T06:00:24.236" classname="XMLBusSystemTest" />
+    <testcase name="PathInvalidNodeTest" file="testsrc/XMLBusSystemTest.cpp" line="315" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
+    <testcase name="RouteTest" file="testsrc/XMLBusSystemTest.cpp" line="345" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
+    <testcase name="RouteByInvalidIndexTest" file="testsrc/XMLBusSystemTest.cpp" line="398" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
+    <testcase name="RouteByInvalidNameTest" file="testsrc/XMLBusSystemTest.cpp" line="434" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
+    <testcase name="RouteGetInvalidStopIDTest" file="testsrc/XMLBusSystemTest.cpp" line="465" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
+    <testcase name="WrongTagsTest" file="testsrc/XMLBusSystemTest.cpp" line="499" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
+    <testcase name="EmptySourceTest" file="testsrc/XMLBusSystemTest.cpp" line="538" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:24.237" classname="XMLBusSystemTest" />
   </testsuite>
 </testsuites>
