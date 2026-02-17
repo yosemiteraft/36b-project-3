@@ -57,7 +57,12 @@ TEST(XMLBusSystemTest, SimpleTest){
 }
 
 TEST(XMLBusSystemTest, StopByIndexTest) {
-    
+    /* Tests for:
+        - StopByIndex with valid index returning correct stop
+        - Stop's ID, NodeID, and Description properties
+        - StopByIndex with basic invalid index returning nullptr
+            - Includes out of bounds and negative index
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -88,6 +93,12 @@ TEST(XMLBusSystemTest, StopByIndexTest) {
 }
 
 TEST(XMLBusSystemTest, StopByIDTest) {
+    /* Tests for:
+        - StopByID with valid ID returning correct stop
+        - Stop's ID, NodeID, and Description properties
+        - StopByID with basic invalid ID returning nullptr
+            - ID that isn't found
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -108,6 +119,11 @@ TEST(XMLBusSystemTest, StopByIDTest) {
 }
 
 TEST(XMLBusSystemTest, SetDescriptionTest) {
+    /* Tests for:
+        - Getting description of a stop
+        - Setting a new description for a stop
+        - Being able to get the new description back
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -124,6 +140,10 @@ TEST(XMLBusSystemTest, SetDescriptionTest) {
 }
 
 TEST(XMLBusSystemTest, ZeroStopsTest) {
+    /* Tests for:
+        - Getting correct number of stops from a source with zero stops
+        - StopByIndex returning nullptr when source has no stops
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "</stops>\n"
@@ -136,6 +156,11 @@ TEST(XMLBusSystemTest, ZeroStopsTest) {
 }
 
 TEST(XMLBusSystemTest, ZeroNodesTest) {
+    /* Tests for:
+        - Path with zero nodes in between the stops
+        - Getting the correct start and end node IDs
+        - NodeCount counts 0 nodes for an empty path
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -158,6 +183,11 @@ TEST(XMLBusSystemTest, ZeroNodesTest) {
 }
 
 TEST(XMLBusSystemTest, ZeroStopsZeroNodesTest) {
+    /* Tests for:
+        - Source with zero stops and zero nodes
+        - StopByIndex returns nullptr when trying to access a stop that doesn't exist
+        - PathByStopIDs returns nullptr when trying to find a path with invalid IDs
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "</stops>\n"
@@ -179,6 +209,11 @@ TEST(XMLBusSystemTest, ZeroStopsZeroNodesTest) {
 }
 
 TEST(XMLBusSystemTest, PathByStopIDsTest) {
+    /* Tests for:
+        - Paths with varying node counts
+        - Correct start and end node IDs for each path
+        - Path with zero nodes should not return nullptr but number of nodes should be zero
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -226,6 +261,9 @@ TEST(XMLBusSystemTest, PathByStopIDsTest) {
 }
 
 TEST(XMLBusSystemTest, NoPathFoundTest) {
+    /* Tests for:
+        - PathByStopIDs returns nullptr when there is no path existing between two stop IDs
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -244,6 +282,11 @@ TEST(XMLBusSystemTest, NoPathFoundTest) {
 }
 
 TEST(XMLBusSystemTest, InvalidPathStopIDTest) {
+    /* Tests for:
+        - PathByStopIDs returns nullptr when invalid stop IDs are passed in
+        - Invalid start ID
+        - Invalid end ID
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -270,6 +313,11 @@ TEST(XMLBusSystemTest, InvalidPathStopIDTest) {
 }
 
 TEST(XMLBusSystemTest, PathInvalidNodeTest) {
+    /* Tests for:
+        - GetNodeID returns the correct node at a valid index
+        - GetNodeID returns 0 when passed an invalid index
+            - Out of range
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -295,6 +343,13 @@ TEST(XMLBusSystemTest, PathInvalidNodeTest) {
 }
 
 TEST(XMLBusSystemTest, RouteTest) {
+    /* Tests for:
+        - Correctly parsing through routes
+        - Returning correct count of routes
+        - RouteByIndex returns correct route when passed valid index
+        - RouteByName returns correct route when passed valid name
+        - Route's name, stop count, and stop IDs are correct
+     */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -341,6 +396,11 @@ TEST(XMLBusSystemTest, RouteTest) {
 }
 
 TEST(XMLBusSystemTest, RouteByInvalidIndexTest) {
+    /* Tests for:
+        - Basic invalid index
+        - RouteByIndex returns nullptr for index that is out of range
+        - RouteByIndex returns nullptr for negative index
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -372,6 +432,9 @@ TEST(XMLBusSystemTest, RouteByInvalidIndexTest) {
 }
 
 TEST(XMLBusSystemTest, RouteByInvalidNameTest) {
+    /* Tests for:
+        - RouteByName returning nullptr when invalid route name is passed
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -400,6 +463,10 @@ TEST(XMLBusSystemTest, RouteByInvalidNameTest) {
 }
 
 TEST(XMLBusSystemTest, RouteGetInvalidStopIDTest) {
+    /* Tests for:
+        - Route GetStopID returns InvalidStopID error when invalid index is passed
+            - Out of bounds and negative index
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -430,6 +497,12 @@ TEST(XMLBusSystemTest, RouteGetInvalidStopIDTest) {
 }
 
 TEST(XMLBusSystemTest, WrongTagsTest) {
+    /* Tests for:
+        - XML that is improperly formatted
+            - Mismatched tags, missing closing tag, missing start tag
+        - Returns 0 for route count when the closing tag is missing
+        - Access valid parsed stops
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                 "<stops>\n"
                                                                 "   <stop id=\"1\" node=\"321\" description=\"First\"/>\n"
@@ -464,6 +537,13 @@ TEST(XMLBusSystemTest, WrongTagsTest) {
 }
 
 TEST(XMLBusSystemTest, EmptySourceTest) {
+    /* Tests for:
+        - Source with zero stops and zero routes
+        - StopCount and RouteCount should return 0
+        - StopByIndex correctly returning nullptr
+        - PathByStopIDs correctly returning nullptr
+        - RouteByIndex correctly returning nullptr
+    */
     auto BusRouteSource = std::make_shared<CStringDataSource>(  "<bussystem>\n"
                                                                     "<stops>\n"
                                                                     "</stops>\n"
