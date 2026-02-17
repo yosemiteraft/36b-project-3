@@ -22,6 +22,7 @@ The project fails to function properly in ...
 * [std::stod](https://cplusplus.com/reference/string/stod/)
 * [How to Access Elements of a Pair in C++?](https://medium.com/@ayushmishra8299/how-to-access-elements-of-a-pair-in-c-9e4cace740a4#:~:text=Accessing%20Elements%20of%20a%20Pair,element%20we%20want%20to%20access.)
 * [Returning an empty string : efficient way in c++](https://stackoverflow.com/questions/26587110/returning-an-empty-string-efficient-way-in-c)
+* [Basic Syntax](https://www.markdownguide.org/basic-syntax/)
 
 ## Generative AI Use
 I used ChatGPT for Prompt 1 and Prompt 2.

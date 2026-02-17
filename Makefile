@@ -69,7 +69,7 @@ MAIN_TARGET				= $(BIN_DIR)/mainsvg
 TEST_STRSINK_TARGET 	= $(TESTBIN_DIR)/teststrdatasink
 TEST_STRSRC_TARGET		= $(TESTBIN_DIR)/teststrdatasource
 TEST_SVGWRITER_TARGET	= $(TESTBIN_DIR)/testsvgwriter
-TEST_XMLREADER_TARGET	= $(TESTBIN_DIR)/testxmlreader
+TEST_XMLREADER_TARGET	= $(TESTBIN_DIR)/testxml
 TEST_XMLBS_TARGET 		= $(TESTBIN_DIR)/testxmlbs
 TEST_OSM_TARGET			= $(TESTBIN_DIR)/testosm
 
@@ -200,3 +200,4 @@ clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(TESTBIN_DIR)
 	rm -rf $(TESTOBJ_DIR)
+	rm -rf $(TESTTMP_DIR)
