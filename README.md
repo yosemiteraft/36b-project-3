@@ -19,6 +19,7 @@ The project fails to function properly in ...
 * [std::pair::pair](https://cplusplus.com/reference/utility/pair/pair/)
 * [std::make_pair](https://cplusplus.com/reference/utility/make_pair/)
 * [call to implicitly-deleted default constructor of ‘unordered_map<pair<int, int>, int>](https://medium.com/@gulshansharma014/call-to-implicitly-deleted-default-constructor-of-unordered-map-pair-int-int-int-d3b2a6da0b41)
+* [std::stod](https://cplusplus.com/reference/string/stod/)
 * [How to Access Elements of a Pair in C++?](https://medium.com/@ayushmishra8299/how-to-access-elements-of-a-pair-in-c-9e4cace740a4#:~:text=Accessing%20Elements%20of%20a%20Pair,element%20we%20want%20to%20access.)
 * [Returning an empty string : efficient way in c++](https://stackoverflow.com/questions/26587110/returning-an-empty-string-efficient-way-in-c)
 

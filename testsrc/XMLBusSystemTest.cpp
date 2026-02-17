@@ -527,8 +527,6 @@ TEST(XMLBusSystemTest, WrongTagsTest) {
     CXMLBusSystem BusSystem(BusRouteReader,BusPathReader);
 
     // Return empty or null results when faulty tags are given
-    std::cout << "StopCount: " << BusSystem.StopCount() << std::endl;
-    std::cout << "RouteCount: " << BusSystem.RouteCount() << std::endl;
     EXPECT_EQ(BusSystem.StopCount(), 3); // parse 3 stops before error
     EXPECT_EQ(BusSystem.RouteCount(), 0); // no closing tag
 

@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="6" failures="0" disabled="0" errors="0" time="0." timestamp="2026-02-17T06:00:28.825" name="AllTests">
-  <testsuite name="OpenStreetMapTest" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-02-17T06:00:28.825">
-    <testcase name="SimpleTest" file="testsrc/OpenStreetMapTest.cpp" line="5" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:28.825" classname="OpenStreetMapTest" />
-    <testcase name="NodeByIndexTest" file="testsrc/OpenStreetMapTest.cpp" line="27" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:28.825" classname="OpenStreetMapTest" />
-    <testcase name="NodeByIDTest" file="testsrc/OpenStreetMapTest.cpp" line="79" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:28.825" classname="OpenStreetMapTest" />
-    <testcase name="InvalidNodeByIndexTest" file="testsrc/OpenStreetMapTest.cpp" line="113" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:28.825" classname="OpenStreetMapTest" />
-    <testcase name="InvalidNodeByIDTest" file="testsrc/OpenStreetMapTest.cpp" line="140" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:28.825" classname="OpenStreetMapTest" />
-    <testcase name="NodeAttrEdgeCasesTest" file="testsrc/OpenStreetMapTest.cpp" line="167" status="run" result="completed" time="0." timestamp="2026-02-17T06:00:28.825" classname="OpenStreetMapTest" />
+<testsuites tests="15" failures="0" disabled="0" errors="0" time="0.001" timestamp="2026-02-17T07:31:54.341" name="AllTests">
+  <testsuite name="OpenStreetMapTest" tests="15" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2026-02-17T07:31:54.341">
+    <testcase name="SimpleTest" file="testsrc/OpenStreetMapTest.cpp" line="7" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.341" classname="OpenStreetMapTest" />
+    <testcase name="NodeByIndexTest" file="testsrc/OpenStreetMapTest.cpp" line="29" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.341" classname="OpenStreetMapTest" />
+    <testcase name="NodeByIDTest" file="testsrc/OpenStreetMapTest.cpp" line="82" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.341" classname="OpenStreetMapTest" />
+    <testcase name="InvalidNodeByIndexTest" file="testsrc/OpenStreetMapTest.cpp" line="117" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.341" classname="OpenStreetMapTest" />
+    <testcase name="InvalidNodeByIDTest" file="testsrc/OpenStreetMapTest.cpp" line="144" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.341" classname="OpenStreetMapTest" />
+    <testcase name="NodeAttrEdgeCasesTest" file="testsrc/OpenStreetMapTest.cpp" line="171" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.341" classname="OpenStreetMapTest" />
+    <testcase name="WayByIndexTest" file="testsrc/OpenStreetMapTest.cpp" line="200" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="WayByInvalidIndexTest" file="testsrc/OpenStreetMapTest.cpp" line="252" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="WayByIDTest" file="testsrc/OpenStreetMapTest.cpp" line="279" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="WayByInvalidIDTest" file="testsrc/OpenStreetMapTest.cpp" line="327" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="InvalidNodeIDTest" file="testsrc/OpenStreetMapTest.cpp" line="354" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="EmptyOSM" file="testsrc/OpenStreetMapTest.cpp" line="379" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="WayZeroNdsTest" file="testsrc/OpenStreetMapTest.cpp" line="396" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="WrongTagsTest" file="testsrc/OpenStreetMapTest.cpp" line="420" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
+    <testcase name="WrongOSMTagTest" file="testsrc/OpenStreetMapTest.cpp" line="452" status="run" result="completed" time="0." timestamp="2026-02-17T07:31:54.342" classname="OpenStreetMapTest" />
   </testsuite>
 </testsuites>

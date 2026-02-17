@@ -193,27 +193,27 @@ struct COpenStreetMap::SImplementation{
     }
 
     bool ParseNode(std::shared_ptr<CXMLReader> src, SXMLEntity &entity) {
-        auto Node = std::make_shared<SNode>(entity);
+        auto NewNode = std::make_shared<SNode>(entity);
         SXMLEntity TempEntity;
 
         while(src->ReadEntity(TempEntity)){
             if(TempEntity.DType == SXMLEntity::EType::EndElement && TempEntity.DNameData == DNodeTag) {
                 break;
             }
-            if((TempEntity.DType == SXMLEntity::EType::StartElement) && (TempEntity.DNameData == Node->DTagTag)) {
-                std::string key = TempEntity.AttributeValue(Node->DTagKeyAttr);
-                std::string value = TempEntity.AttributeValue(Node->DTagValueAttr);
-                Node->AddAttribute(key, value);
+            if((TempEntity.DType == SXMLEntity::EType::StartElement) && (TempEntity.DNameData == NewNode->DTagTag)) {
+                std::string key = TempEntity.AttributeValue(NewNode->DTagKeyAttr);
+                std::string value = TempEntity.AttributeValue(NewNode->DTagValueAttr);
+                NewNode->AddAttribute(key, value);
             }
         }
-        DNodesByIndex.push_back(Node);
-        TNodeID id = Node->ID();
-        DNodesByID[id] = Node;
+        DNodesByIndex.push_back(NewNode);
+        TNodeID id = NewNode->ID();
+        DNodesByID[id] = NewNode;
         return true;
     }
 
     bool ParseWay(std::shared_ptr<CXMLReader> src, SXMLEntity &entity) {
-        auto Way = std::make_shared<SWay>(entity);
+        auto NewWay = std::make_shared<SWay>(entity);
         SXMLEntity TempEntity;
 
         while(src->ReadEntity(TempEntity)) {
@@ -221,19 +221,19 @@ struct COpenStreetMap::SImplementation{
                 break;
             }
             if(TempEntity.DType == SXMLEntity::EType::StartElement) {
-                if(TempEntity.DNameData == Way->DNdTag) {
-                    TNodeID nodeid = std::stoull(TempEntity.AttributeValue(Way->DRefAttr)); // value of ref attr stored as TNodeID
-                    Way->AddNodeID(nodeid);
-                } else if(TempEntity.DNameData == Way->DTagTag) {
-                    std::string key = TempEntity.AttributeValue(Way->DTagKeyAttr);
-                    std::string value = TempEntity.AttributeValue(Way->DTagValueAttr);
-                    Way->AddAttribute(key, value);
+                if(TempEntity.DNameData == NewWay->DNdTag) {
+                    TNodeID nodeid = std::stoull(TempEntity.AttributeValue(NewWay->DRefAttr)); // value of ref attr stored as TNodeID
+                    NewWay->AddNodeID(nodeid);
+                } else if(TempEntity.DNameData == NewWay->DTagTag) {
+                    std::string key = TempEntity.AttributeValue(NewWay->DTagKeyAttr);
+                    std::string value = TempEntity.AttributeValue(NewWay->DTagValueAttr);
+                    NewWay->AddAttribute(key, value);
                 }
             }
         }
-        DWaysByIndex.push_back(Way);
-        TNodeID id = Way->ID();
-        DWaysByID[id] = Way;
+        DWaysByIndex.push_back(NewWay);
+        TNodeID id = NewWay->ID();
+        DWaysByID[id] = NewWay;
         return true;
     }
 
