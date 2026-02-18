@@ -94,12 +94,12 @@ Accesses a map node by its unique node ID.
 
 **Parameters:**
 
-* id: Unique ID associated with a particular node
+* id: unique ID associated with a particular node
 
 **Return types:**
 
 * std::shared_ptr<SNode>: Valid node pointer if ID is provided
-* nullptr: Invalid/non-existent ID provided
+* nullptr: Invalid or no ID provided
 
 ### WayByIndex
 
@@ -120,13 +120,13 @@ Accesses a map way by its index.
 
 virtual std::shared_ptr<SWay> WayByID(TWayID id) const noexcept = 0;
 
-Accesses a map way by its unique way ID.
+Accesses a map way by its way ID.
 
 **Parameters:**
 
-* id: Unique ID associated with a particular way
+* id: ID associated with a particular way
 
 **Return types:**
 
 * std::shared_ptr<SWay>: Valid way pointer if ID is provided
-* nullptr: Invalid/non-existent ID provided
+* nullptr: Invalid or no ID provided
